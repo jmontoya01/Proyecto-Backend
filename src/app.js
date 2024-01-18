@@ -10,11 +10,12 @@ const cartsRouter = require("./routes/carts.router.js")
 //Middleware
 app.use(express.urlencoded({ extended: true }))
 app.use(express.json())
+app.use(express.static("./src/public"))
 
 //Routes
 
-app.use("/api", productsRouter)
-app.use("/api", cartsRouter)
+app.use("/api/products", productsRouter)
+app.use("/api/carts", cartsRouter)
 
 
 

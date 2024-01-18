@@ -1,92 +1,23 @@
 [
-    {
-        "id": 1,
-        "title": "Call of duty",
-        "description": "Ultima parche implementado",
-        "price": 120,
-        "img": "imagen de portada",
-        "code": "0001",
-        "stock": 200
-    },
-    {
-        "id": 2,
-        "title": "Super Mario",
-        "description": "Gran clasico de los juegos retro",
-        "price": 100,
-        "img": "imagen de Mario pixelada",
-        "code": "0002",
-        "stock": 98
-    },
-    {
-        "id": 3,
-        "title": "Zelda",
-        "description": "Nueva aventura de Link",
-        "price": 150,
-        "img": "imagen de Link",
-        "code": "0003",
-        "stock": 300
-    },
-    {
-        "id": 4,
-        "title": "World of warcraft",
-        "description": "Ultima parche implementado",
-        "price": 210,
-        "img": "imagen de portada ultimo parche",
-        "code": "0004",
-        "stock": 250
-    },
-    {
-        "id": 5,
-        "title": "League of Legends",
-        "description": "Ultima actualización de temporada",
-        "price": 10,
-        "img": "imagen de nuevo campeon",
-        "code": "0005",
-        "stock": 10
-    },
-    {
-        "id": 6,
-        "title": "Super Metroid",
-        "description": "Nueva aventura de Samus",
-        "price": 120,
-        "img": "imagen de Samus",
-        "code": "0006",
-        "stock": 300
-    },
-    {
-        "id": 7,
-        "title": "Resident Evil 4 Remake ",
-        "description": "Remake del exitoso juego",
-        "price": 150,
-        "img": "imagen de Leon",
-        "code": "0007",
-        "stock": 98
-    },
-    {
-        "id": 8,
-        "title": "Cookie Cutter",
-        "description": "Un nuevo metroidvania con un apartado gráfico muy llamativo de dibujos animados",
-        "price": 130,
-        "img": "imagen de portada",
-        "code": "0008",
-        "stock": 80
-    },
-    {
-        "id": 9,
-        "title": "Paranoid",
-        "description": "Paranoid es una aventura de terror desarrollada por Madmind Studio",
-        "price": 220,
-        "img": "imagen de portada",
-        "code": "0009",
-        "stock": 210
-    },
-    {
-        "id": 10,
-        "title": "Bulletstorm VR ",
-        "description": "ulletstorm VR es un shooter en primera persona para realidad virtual",
-        "price": 250,
-        "img": "imagen de portada VR",
-        "code": "0010",
-        "stock": 198
-    }
+  {
+    "id": 1,
+    "products": [
+      {
+        "product": "2",
+        "quantity": 2
+      }
+    ]
+  },
+  {
+    "id": 2,
+    "products": []
+  },
+  {
+    "id": 3,
+    "products": []
+  },
+  {
+    "id": 4,
+    "products": []
+  }
 ]

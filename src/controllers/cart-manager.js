@@ -37,6 +37,20 @@ class CartManager {
         return newCart
     }
 
-    
+    async getCartById(cartId, productId, quantity = 1 ) {
+        const cart = await this.getCartById(cartId)
+        const productExists = cart.products.find(p => p.product === productId)
+
+        if (productExists) {
+            productExists.quantity += quantity
+        } else {
+            cart.products.push({product: productId, quantity})
+        }
+
+        await this.saveCarts()
+        return cart
+    }
 }
+
+module.exports = CartManager
 

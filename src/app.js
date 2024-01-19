@@ -5,6 +5,16 @@ const productsRouter = require("./routes/products.router.js")
 const cartsRouter = require("./routes/carts.router.js")
 
 
+//handlebars
+const exphbs = require("express-handlebars")
+app.engine("handlebars", exphbs.engine())
+app.set("view engine", "handlebars")
+app.set("views", "./src/views")
+
+app.get("/", (req, res) => {
+    res.render("index")
+})
+
 
 
 //Middleware

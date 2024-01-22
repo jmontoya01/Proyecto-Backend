@@ -41,8 +41,14 @@ class ProductManager {
 
     }
 
-    getProducts() {
-        console.log(this.products)
+    async getProducts() {
+        try {
+            const arrayProducts = await this.leerArchivo()
+            return arrayProducts
+        } catch (error) {
+            console.log("Error al leer el archivo", error);
+            throw error
+        }
     }
 
     async getProductById(id) {

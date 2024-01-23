@@ -41,14 +41,32 @@ app.use(express.json())
 app.use(express.static("./src/public"))
 
 //Routes
-
 app.use("/api/products", productsRouter)
 app.use("/api/carts", cartsRouter)
 app.use("/", viewsRouter)
 
+//socket.io
 
-
-app.listen(PUERTO, () => {
+const httpServer = app.listen(PUERTO, () => {
     console.log(`Escuchando en http://localhost:${PUERTO}`)
 })
+
+const socket = require("socket.io")
+const io = socket(httpServer)
+
+io.on("connection", (socket) => {
+    console.log("Un cliente se conecto")
+
+    socket.on("messaje", (data) => {
+        console.log(data)
+        io.sockets.emit("messaje", data)
+    })
+
+    socket.emit("saludo", "Hola, tú eres tú")
+})
+
+
+
+
+
 

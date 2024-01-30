@@ -1,10 +1,10 @@
 const express = require("express")
 const app = express()
 const PUERTO = 8080
-
 const productsRouter = require("./routes/products.router.js")
 const cartsRouter = require("./routes/carts.router.js")
 const viewsRouter = require("./routes/views.router.js")
+const socket = require("socket.io")
 
 
 //handlebars
@@ -47,22 +47,33 @@ app.use("/", viewsRouter)
 
 //socket.io
 
+
 const httpServer = app.listen(PUERTO, () => {
     console.log(`Escuchando en http://localhost:${PUERTO}`)
 })
 
-const socket = require("socket.io")
+
+const ProductManager = require("./controllers/product-manager.js")
+const productManager = new ProductManager("./src/models/products.json")
+
 const io = socket(httpServer)
 
-io.on("connection", (socket) => {
+
+
+io.on("connection", async (socket) => {
     console.log("Un cliente se conecto")
 
-    socket.on("messaje", (data) => {
-        console.log(data)
-        io.sockets.emit("messaje", data)
+    socket.emit("products", await productManager.getProducts())
+
+    socket.on("deleteProduct", async (id) => {
+        await productManager.borrarProducto(id)
+        io.sockets.emit("products", await productManager.getProducts())
     })
 
-    socket.emit("saludo", "Hola, tú eres tú")
+    socket.on("addProduct", async (products) => {
+        await productManager.addProduct(products)
+        io.sockets.emit("products", await productManager.getProducts())
+    })
 })
 
 

@@ -7,41 +7,71 @@ const manager = new ProductManager("./src/models/products.json")
 
 //Routes
 
-router.get("/products", async (req, res) => {
+router.get("/", async (req, res) => {
     try {
-        const arrayProducts = await manager.leerArchivo()
-
-        let limit = parseInt(req.query.limit)
-
+        const limit = req.query.limit
+        const products = await manager.getProducts()
         if (limit) {
-            const arrayLimit = arrayProducts.slice(0, limit)
-            return res.send(arrayLimit)
+            res.json(products.slice(0, limit))
         } else {
-            return res.send(arrayProducts)
+            res.json(products)
         }
-
-
     } catch (error) {
-        return res.send("Error al cargar los productos", error)
+        console.error("Error al cargar los productos", error)
+        res.status(500).json({ error: "error interno del servidor" })
     }
 })
 
-router.get('/products/:pid', async (req, res) => {
-
+router.get('/:pid', async (req, res) => {
+    const id = req.params.pid
     try {
-        let pid = parseInt(req.params.pid)
+        const product = manager.getProductById(parseInt(id))
 
-        const searchId = await manager.getProductById(pid)
-
-        if (searchId) {
-            return res.send(searchId)
-        } else {
-            res.send("Id de producto no encontrado")
+        if (!product) {
+            return res.json({ error: "producto no encontrado" })
         }
+        res.json(product)
 
     } catch (error) {
-        console.error(error)
-        res.send("Error al buscar el id del producto")
+        console.error("Error al buscar el producto", error)
+        res.status(500).json({ error: "error interno del servidor" })
+    }
+})
+
+router.post("/", async (req, res) =>{
+    const newProduct = req.body
+    try {
+        await manager.addProduct(newProduct)
+        res.status(201).json({message: "Producto agregado con éxito"})
+    } catch (error) {
+        console.error("Error al agregar producto", error);
+        res.status(500).json({ error: "Error interno del servidor"})
+    }
+    
+})
+
+router.put("/:pid", async (req, res) => {
+    const id = req.params.pid
+    const updateProduct = req.body
+
+    try {
+        await manager.updateProduct(parseInt(id), updateProduct)
+        res.json({message: "Producto actualizado exitosamente"})
+    } catch (error) {
+        console.error("Error al actualizar producto", error);
+        res.status(500).json({error: "Error interno del servidor"})
+    }
+})
+
+router.delete("/:pid", async (req, res) => {
+    const id = req.params.pid
+
+    try {
+        await manager.borrarProducto(parseInt(id))
+        res.json({message: "Producto eliminado con éxito"})
+    } catch (error) {
+        console.error("Error al eliminar el producto", error)
+        res.status(500).json({error: "Error interno del servidor"})
     }
 })
 

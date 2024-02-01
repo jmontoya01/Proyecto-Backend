@@ -17,7 +17,7 @@ const renderProducts = (products) => {
         <p>Id ${item.id}</p>
         <p>Titulo ${item.title}</p>
         <p>Precio ${item.price}</p>
-        <button> Eliminar </button>
+        <button class="btnEliminar"> Eliminar </button>
         `
         containerProducts.appendChild(card)
         card.querySelector("button").addEventListener("click", () => {

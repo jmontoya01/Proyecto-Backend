@@ -3,17 +3,43 @@ h1 {
     text-align: center;
 }
 
-.cardContainer {
+#containerProducts{
     display: flex;
     justify-content: center;
     align-items: center;
     flex-wrap: wrap;
 }
 
+
 .card {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
     border: 1px solid #ccc;
     border-radius: 2px;
     margin: 10px;
     padding: 10px;
-    min-width: 200px;
+    width: 200px;
+    border-radius: 8px;
+}
+
+.btnEliminar{
+    width: 100px;
+    border-radius: 5px;
+    text-align: center;
+}
+
+.btnEliminar:hover{
+    background-color: aquamarine;
+}
+
+.form{
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+}
+
+.h2Titulo{
+    text-align: center;
 }

@@ -33,17 +33,6 @@
     "thumbnails": []
   },
   {
-    "id": 6,
-    "title": "Super Metroid",
-    "description": "Nueva aventura de Samus",
-    "price": 120,
-    "img": "imagen de Samus",
-    "code": "0006",
-    "stock": 300,
-    "status": true,
-    "thumbnails": []
-  },
-  {
     "id": 7,
     "title": "Resident Evil 4 Remake ",
     "description": "Remake del exitoso juego",

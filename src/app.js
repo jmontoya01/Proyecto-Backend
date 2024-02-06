@@ -5,7 +5,7 @@ const productsRouter = require("./routes/products.router.js")
 const cartsRouter = require("./routes/carts.router.js")
 const viewsRouter = require("./routes/views.router.js")
 const socket = require("socket.io")
-
+require("./database.js")
 
 //handlebars
 const exphbs = require("express-handlebars")
@@ -53,17 +53,28 @@ const httpServer = app.listen(PUERTO, () => {
 })
 
 
-const ProductManager = require("./controllers/product-manager.js")
-const productManager = new ProductManager("./src/models/products.json")
+const ProductManager = require("./dao/db/product-manager-db.js")
+const productManager = new ProductManager()
+
+const messageModel = require("./dao/models/messages.model.js")
 
 const io = socket(httpServer)
-
 
 
 io.on("connection", async (socket) => {
     console.log("Un cliente se conecto")
 
     socket.emit("products", await productManager.getProducts())
+
+    socket.on("messages", async data => {
+
+        await messageModel.create(data)
+
+        const messages = await messageModel.find()
+
+        io.sockets.emit("messages", messages)
+
+    })
 
     socket.on("deleteProduct", async (id) => {
         await productManager.borrarProducto(id)

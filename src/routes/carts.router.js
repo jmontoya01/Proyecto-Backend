@@ -1,11 +1,11 @@
 const express = require("express")
 const router = express.Router()
-const cartManager = require("../controllers/cart-manager.js")
-const manager = new cartManager("./src/models/carts.json")
+const cartManager = require("../dao/db/cart-manager-db.js")
+const manager = new cartManager()
 
 router.post("/", async (req, res) => {
     try {
-        const newCart = await manager.createCarts()
+        const newCart = await manager.createCart()
         res.json(newCart)
     } catch (error) {
         console.error("Error al crear un nuevo carrito de compras", error)
@@ -14,7 +14,7 @@ router.post("/", async (req, res) => {
 })
 
 router.get("/:cid", async (req, res) => {
-    const cartId = parseInt(req.params.cid)
+    const cartId = req.params.cid
 
     try {
         const cart = await manager.getCartById(cartId)
@@ -26,12 +26,12 @@ router.get("/:cid", async (req, res) => {
 })
 
 router.post("/:cid/product/:pid", async (req, res) => {
-    const cartId = parseInt(req.params.cid)
+    const cartId = req.params.cid
     const productId = req.params.pid
     const quantity = req.body.quantity || 1
     
     try {
-        const updateCart = await manager.addProductToCart(cartId, productId, quantity)
+        const updateCart = await manager.addProductCart(cartId, productId, quantity)
         res.json(updateCart.products)
     } catch (error) {
         console.error("Error al agregar productos al carrito de compras", error)

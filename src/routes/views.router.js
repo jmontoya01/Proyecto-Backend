@@ -1,7 +1,7 @@
 const express = require("express")
 const router = express.Router()
-const ProductManager = require("../controllers/product-manager.js")
-const productManager = new ProductManager("./src/models/products.json")
+const ProductManager = require("../dao/db/product-manager-db")
+const productManager = new ProductManager()
 
 router.get("/", async (req, res) => {
     try {
@@ -27,6 +27,10 @@ router.get("/realtimeproducts", async (req, res) => {
             error: "Error interno del servidor"
         });
     }
+})
+
+router.get("/chat", async (req, res) => {
+    res.render("chat")
 })
 
 

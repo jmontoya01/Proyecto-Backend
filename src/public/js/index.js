@@ -46,3 +46,42 @@ const addProduct = () => {
         };
         socket.emit("addProduct", product)
 }
+
+//chat
+
+let user
+const chatBox = document.getElementById("chatBox")
+
+swal.fire({
+    title: "Como te llamas?",
+    input: "text",
+    Text: "Ingresa nombre de usuario que se mostrara en el chat",
+    inputValidator: (value) => {
+        return !value && "Necesita ingresar un nombre para continuar"
+    },
+    allowOutsideClick: false,
+}).then( result => {
+    user = result.value
+})
+
+chatBox.addEventListener("keyup", (event) => {
+    if(event === "Enter") {
+        if(chatBox.value.trim().length > 0) {
+            socket.emit("messages", {user: user, messages: chatBox.value})
+            chatBox.value = ""
+        }
+    }
+})
+
+//Listener de mensajes
+
+socket.on("messages", data => {
+    let log = documen.getElementById("messagesLogs")
+    let messages = ""
+
+    data.forEach( messages =>{
+        messages = messages + `${messages.user} dice: ${messages.messages} <br>`
+    })
+
+    log.innerHTML = messages
+})

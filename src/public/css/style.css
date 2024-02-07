@@ -43,3 +43,19 @@ h1 {
 .h2Titulo{
     text-align: center;
 }
+
+.chatBox{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#chatBox{
+    border-radius: 5PX;
+}
+
+.messagesLogs{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}

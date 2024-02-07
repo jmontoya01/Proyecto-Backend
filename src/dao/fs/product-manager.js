@@ -13,9 +13,9 @@ class ProductManager {
 
     async addProduct(nuevoObjeto) {
 
-        let { title, description, price, img, code, stock } = nuevoObjeto
+        let { title, description, price, img, code, stock, thumbnails } = nuevoObjeto
 
-        if (!title || !description || !price || !img || !code || !stock) {
+        if (!title || !description || !price || !img || !code || !stock || !thumbnails) {
             console.log("Todos los campos son hobligatorios para continuar ")
             return
         }
